@@ -106,6 +106,10 @@
             },
             "development": {
               "buildTarget": "client:build:development"
+            },
+            "docker": {
+              "buildTarget": "client:build:docker",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
