@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HRIS</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    /* Pre-Angular splash: renders immediately, removed by App on bootstrap. */
+    #preboot-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483647;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.4s ease-out, visibility 0.4s ease-out;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+        "Segoe UI Emoji";
+    }
+    #preboot-splash.preboot-splash--hiding,
+    #preboot-splash.splash--hiding {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Match Angular InitialSplash styles (client/src/shared/initial-splash/initial-splash.css). */
+    #preboot-splash.splash {
+      background: transparent;
+    }
+    #preboot-splash .splash__backdrop {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, #e0f2fe 0, transparent 55%),
+                  radial-gradient(circle at bottom right, #e5e7eb 0, transparent 55%),
+                  linear-gradient(145deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+    #preboot-splash .splash__content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem;
+      text-align: center;
+    }
+    #preboot-splash .splash__brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    #preboot-splash .splash__logo {
+      width: 4rem;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.35);
+    }
+    #preboot-splash .splash__logo-icon {
+      width: 2.25rem;
+      height: 2.25rem;
+      color: #f8fafc;
+    }
+    #preboot-splash .splash__title {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #0f172a;
+    }
+    #preboot-splash .splash__message {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #6b7280;
+    }
+    #preboot-splash .splash__indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    #preboot-splash .splash__dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background-color: #6b7280;
+      animation: splash-bounce 1.4s ease-in-out infinite both;
+    }
+    #preboot-splash .splash__dot:nth-child(2) { animation-delay: 0.16s; }
+    #preboot-splash .splash__dot:nth-child(3) { animation-delay: 0.32s; }
+    @keyframes splash-bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.6; }
+      40% { transform: translateY(-4px); opacity: 1; }
+    }
+    @media (max-width: 640px) {
+      #preboot-splash .splash__content { padding: 1.75rem; }
+      #preboot-splash .splash__title { font-size: 1.5rem; }
+      #preboot-splash .splash__message { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="preboot-splash" class="splash" role="status" aria-label="Loading application">
+    <div class="splash__backdrop" aria-hidden="true"></div>
+    <div class="splash__content">
+      <div class="splash__brand">
+        <div class="splash__logo" aria-hidden="true">
+          <svg class="splash__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+          </svg>
+        </div>
+        <h1 class="splash__title">Test</h1>
+      </div>
+      <p class="splash__message">Preparing your workspace...</p>
+      <div class="splash__indicator" aria-hidden="true">
+        <span class="splash__dot"></span>
+        <span class="splash__dot"></span>
+        <span class="splash__dot"></span>
+      </div>
+    </div>
+  </div>
+  <app-root></app-root>
+</body>
+</html>

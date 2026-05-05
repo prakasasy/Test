@@ -1,0 +1,123 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.4s ease-out, visibility 0.4s ease-out;
+  background: transparent;
+}
+
+.splash--hiding {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash__backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, #e0f2fe 0, transparent 55%),
+              radial-gradient(circle at bottom right, #e5e7eb 0, transparent 55%),
+              linear-gradient(145deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+}
+
+.splash__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.splash__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.splash__logo {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.35);
+}
+
+.splash__logo-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #f8fafc;
+}
+
+.splash__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #0f172a;
+}
+
+.splash__message {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.splash__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.splash__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background-color: #6b7280;
+  animation: splash-bounce 1.4s ease-in-out infinite both;
+}
+
+.splash__dot:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.splash__dot:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+@keyframes splash-bounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .splash__content {
+    padding: 1.75rem;
+  }
+
+  .splash__title {
+    font-size: 1.5rem;
+  }
+
+  .splash__message {
+    font-size: 0.9rem;
+  }
+}

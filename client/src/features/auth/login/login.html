@@ -1,0 +1,120 @@
+<div class="min-h-screen min-h-dvh flex items-center justify-center relative p-4 bg-base-300">
+  <!-- Top section: soft V shape (Tailwind arbitrary values, no custom CSS) -->
+  <div class="absolute inset-0 bottom-auto h-[50%] bg-primary [clip-path:polygon(0_0,100%_0,100%_80%,50%_100%,0_80%)] pointer-events-none" aria-hidden="true"></div>
+  <div class="w-full max-w-[450px] relative z-10">
+    @if (loginSuccess()) {
+      <div class="card bg-base-100 shadow-xl rounded-2xl border border-success/30" role="status" aria-live="polite">
+        <div class="card-body items-center text-center gap-4">
+          <div class="flex items-center justify-center w-14 h-14 rounded-full bg-success/20" aria-hidden="true">
+            <svg class="w-8 h-8 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 class="card-title text-success justify-center">Login successful</h2>
+          <p class="text-base-content/70">Redirecting you to the home page...</p>
+          <span class="loading loading-dots loading-md text-primary" aria-hidden="true"></span>
+        </div>
+      </div>
+    } @else {
+      <div class="card bg-base-100 shadow-xl rounded-2xl border-0 p-8">
+        <div>
+          <h1 class="text-2xl font-semibold text-center text-base-content mb-2">Sign in</h1>
+          <p class="text-center text-base-content/70 mb-6">Enter your credentials to access your account.</p>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4" noValidate>
+            <div class="form-control">
+              <label for="login-email" class="label">
+                <span class="label-text font-medium">Email</span>
+              </label>
+              <input
+                id="login-email"
+                type="email"
+                formControlName="email"
+                class="input input-bordered w-full"
+                [class.input-error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                placeholder="you@example.com"
+                autocomplete="off"
+                [attr.aria-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                [attr.aria-describedby]="(loginForm.get('email')?.invalid && loginForm.get('email')?.touched) ? 'email-error' : null"
+              />
+              @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+                <p id="email-error" class="label text-error text-sm mt-1" role="alert">
+                  @if (loginForm.get('email')?.errors?.['required']) {
+                    Email is required.
+                  } @else if (loginForm.get('email')?.errors?.['email']) {
+                    Please enter a valid email address.
+                  }
+                </p>
+              }
+            </div>
+
+            <div class="form-control">
+              <label for="login-password" class="label">
+                <span class="label-text font-medium">Password</span>
+              </label>
+              <div class="relative">
+                <input
+                  id="login-password"
+                  [type]="showPassword() ? 'text' : 'password'"
+                  formControlName="password"
+                  class="input input-bordered w-full pr-12"
+                  [class.input-error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                  placeholder="••••••••"
+                  autocomplete="current-password"
+                  [attr.aria-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                  [attr.aria-describedby]="(loginForm.get('password')?.invalid && loginForm.get('password')?.touched) ? 'password-error' : null"
+                />
+                <button
+                  type="button"
+                  class="btn btn-ghost btn-sm btn-square absolute right-1 top-1/2 -translate-y-1/2"
+                  (click)="togglePasswordVisibility()"
+                  [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+                  [attr.aria-pressed]="showPassword()"
+                >
+                  @if (showPassword()) {
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    </svg>
+                  } @else {
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  }
+                </button>
+              </div>
+              @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+                <p id="password-error" class="label text-error text-sm mt-1" role="alert">
+                  Password is required.
+                </p>
+              }
+            </div>
+
+            @if (loginError(); as errorMessage) {
+              <div class="alert alert-error shadow-lg" role="alert" aria-live="assertive">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{{ errorMessage }}</span>
+              </div>
+            }
+
+            <button
+              type="submit"
+              class="btn btn-primary mt-2"
+              [disabled]="isSubmitting()"
+            >
+              @if (isSubmitting()) {
+                <span class="loading loading-spinner loading-sm" aria-hidden="true"></span>
+                <span>Logging in...</span>
+              } @else {
+                Sign in
+              }
+            </button>
+          </form>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+

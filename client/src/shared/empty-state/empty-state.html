@@ -1,0 +1,11 @@
+<div style="text-align: center; vertical-align: middle; width: 100%;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; min-height: 100px;">
+      <i [class]="iconClass()" [style]="iconStyle()"></i>
+      <div style="text-align: center;">
+        <h3 style="margin: 0; color: #6b7280; font-weight: 500;">{{ title() }}</h3>
+        @if (description()) {
+          <p style="margin: 0.5rem 0 0 0; color: #9ca3af; font-size: 0.875rem;">{{ description() }}</p>
+        }
+      </div>
+    </div>
+  </div>

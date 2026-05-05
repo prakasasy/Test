@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Test.Api/Test.Api.csproj" />
+  <Project Path="Test.Application/Test.Application.csproj" />
+  <Project Path="Test.Domain/Test.Domain.csproj" />
+  <Project Path="Test.Infrastructure/Test.Infrastructure.csproj" />
+</Solution>

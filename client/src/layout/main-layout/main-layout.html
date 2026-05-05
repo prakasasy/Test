@@ -1,0 +1,24 @@
+<app-global-loader></app-global-loader>
+<div class="flex h-dvh min-h-0 flex-row overflow-hidden">
+  @if (!sidebarState.collapsed()) {
+    <div
+      class="fixed inset-0 z-30 bg-black/50 md:hidden"
+      role="presentation"
+      aria-hidden="true"
+      (click)="sidebarState.toggle()"
+    ></div>
+  }
+  <app-sidebar />
+  <div class="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+    <app-topbar />
+    <main
+      class="flex min-h-0 flex-1 flex-col overflow-hidden bg-gray-100"
+      role="main"
+    >
+      <div class="min-h-0 flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-6">
+        <router-outlet />
+      </div>
+      <app-footer class="shrink-0" />
+    </main>
+  </div>
+</div>

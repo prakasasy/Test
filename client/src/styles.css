@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+
+/* SweetAlert2 — required for modal/backdrop/button layout (JS is loaded via AlertService). */
+@import 'sweetalert2/dist/sweetalert2.min.css';
+
+@layer base {
+  html,
+  body {
+    @apply h-full;
+  }
+  body {
+    @apply overflow-hidden;
+  }
+  app-root {
+    @apply block h-full min-h-0;
+  }
+}
+@import 'primeicons/primeicons.css';
+
+@plugin "daisyui" {
+  themes: lofi --default;
+  exclude: rootscrollgutter;
+}
+
+/* PrimeNG p-table: caption/header strip — same intent as TablePassThroughOptions.header (app-wide) */
+.p-datatable-header {
+  border: none !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* PrimeNG p-table: inline column filter row (p-columnFilter display="row" default) — reusable app-wide */
+.p-datatable-inline-filter p-columnfilterformelement {
+  flex: 1 1 auto;
+  min-width: 150px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.p-datatable-inline-filter p-columnfilterformelement .p-inputtext {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
